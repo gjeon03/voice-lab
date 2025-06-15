@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎙️ Voice Lab
 
-## Getting Started
+이 레포지토리는 웹에서 음성 입력 기능을 학습하고 실험해본 결과물들을 기록한 공간입니다.  
+React와 Web APIs를 활용하여 **음성 녹음**, **볼륨 시각화**, **음성 → 텍스트(STT)** 전환 기능 등을 점진적으로 구현합니다.
 
-First, run the development server:
+> 📘 개인 학습을 위한 프로젝트입니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📌 목표 기능
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [x] 마이크로부터 음성 입력 받기 (`MediaRecorder`)
+- [x] 녹음 시작/중지 UI 구현
+- [x] 녹음 후 오디오 재생 기능
+- [ ] Web Speech API를 활용한 음성 → 텍스트 변환 (진행 중)
+- [ ] 실시간 볼륨 크기 시각화
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠 기술 스택
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- React (Next.js)
+- TypeScript
+- MediaRecorder API
+- Web Audio API
+- Web Speech API
