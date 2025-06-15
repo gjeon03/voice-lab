@@ -1,37 +1,19 @@
 "use client";
 
-import { createMediaRecorder } from "@/utils/media-recorder";
-import { useRef, useState } from "react";
+import { useVoiceRecorder } from "@/hooks/use-voice-recorder";
 
 export default function VoiceRecorder() {
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [isRecording, setIsRecording] = useState(false);
-
-  const handleStartRecording = async () => {
-    const recorder = await createMediaRecorder(() => {
-      setIsRecording(false);
-      console.log("Recording stopped.");
-    });
-
-    if (recorder) {
-      mediaRecorderRef.current = recorder;
-      recorder.start();
-      setIsRecording(true);
-      console.log("Recording started...");
+  const { isRecording, startRecording, stopRecording } = useVoiceRecorder(
+    (blob) => {
+      console.log("녹음된 오디오:", blob);
     }
-  };
-
-  const handleStopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop();
-    }
-  };
+  );
 
   const handleToggleRecording = () => {
     if (isRecording) {
-      handleStopRecording();
+      stopRecording();
     } else {
-      handleStartRecording();
+      startRecording();
     }
   };
 
