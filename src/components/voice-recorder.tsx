@@ -1,5 +1,6 @@
 "use client";
 
+import { createMediaRecorder } from "@/utils/media-recorder";
 import { useRef, useState } from "react";
 
 export default function VoiceRecorder() {
@@ -7,42 +8,22 @@ export default function VoiceRecorder() {
   const [isRecording, setIsRecording] = useState(false);
 
   const handleStartRecording = async () => {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      console.error("getUserMedia not supported on your browser!");
-      return;
-    }
+    const recorder = await createMediaRecorder(() => {
+      setIsRecording(false);
+      console.log("Recording stopped.");
+    });
 
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const recorder = new MediaRecorder(stream);
+    if (recorder) {
       mediaRecorderRef.current = recorder;
-      setIsRecording(true);
-
       recorder.start();
+      setIsRecording(true);
       console.log("Recording started...");
-
-      recorder.ondataavailable = (event) => {
-        // 녹음된 오디오 데이터를 여기에서 처리합니다.
-        console.log("Audio data available:", event.data);
-      };
-
-      recorder.onstop = () => {
-        setIsRecording(false);
-        console.log("Recording stopped.");
-      };
-    } catch (error) {
-      console.error("Error accessing microphone:", error);
     }
   };
 
   const handleStopRecording = () => {
     if (mediaRecorderRef.current && isRecording) {
       mediaRecorderRef.current.stop();
-
-      // 녹음은 중지되지만, 스트림은 계속 유지됩니다.
-      mediaRecorderRef.current.stream
-        .getTracks()
-        .forEach((track) => track.stop());
     }
   };
 
